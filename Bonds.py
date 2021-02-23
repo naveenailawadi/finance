@@ -30,3 +30,29 @@ class Bond:
         pv = self.pv_annuity + self.pv_principal
 
         return pv
+
+    def current_yield(self, price=None):
+        if price:
+            current_yield = self.coupon / price
+        else:
+            current_yield = self.coupon / self.pv
+
+        return current_yield
+
+
+def real_rate(nominal_rate, inflation_rate):
+    rate = ((1 + nominal_rate) / (1 + inflation_rate)) - 1
+
+    return rate
+
+
+def nominal_rate(real_rate, inflation_rate):
+    rate = (1 + real_rate) * (1 + inflation_rate) - 1
+
+    return rate
+
+
+def inflation_rate(nominal_rate, real_rate):
+    rate = (1 + nominal_rate) / (1 + real_rate) - 1
+
+    return rate
